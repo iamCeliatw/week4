@@ -23,11 +23,9 @@ def signin():
     if request.method == "POST":
         user_account = request.form['account']
         user_password = request.form['password']
+    if user_account == "test" and user_password == "test":
         session['ac'] = user_account
         session['pa'] = user_password
-    else:
-        return redirect("/")
-    if user_account == "test" and user_password == "test":
         return redirect("/member")
     elif user_account == "" or user_password == "":
         return redirect("/error?message=請輸入帳號、密碼")
@@ -37,7 +35,7 @@ def signin():
 #成功登入頁
 @app.route("/member")
 def member():
-    if session.get('ac') == 'test' and session.get('pa') == 'test':
+    if session['ac'] != None and session["pa"] != None:
         return render_template("success.html")
     else:
         return redirect("/")
@@ -58,5 +56,7 @@ def signout():
 def square(number):
     result = str(number ** 2)
     return render_template("result.html", data=result)
+
+
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
