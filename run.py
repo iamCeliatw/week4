@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from flask import redirect
-from flask import session
+from flask import session, url_for
 
 app = Flask(
     __name__,
@@ -13,8 +13,11 @@ app = Flask(
 #設定session 密鑰
 app.secret_key= "asd24680"
 
-@app.route("/")
+@app.route("/",methods=["GET", "POST"])
 def index():
+    if request.method == "POST":
+        result = request.form['variable']
+        return redirect(url_for("square", number=result))
     return render_template("index2.html")
 
 #驗證系統路由 使用POST
@@ -35,7 +38,7 @@ def signin():
 #成功登入頁
 @app.route("/member")
 def member():
-    if session['ac'] != None and session["pa"] != None:
+    if session['ac'] and session["pa"]:
         return render_template("success.html")
     else:
         return redirect("/")
