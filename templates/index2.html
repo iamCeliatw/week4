@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css')}}">
+    <script type="text/javascript" src="{{url_for('static', filename='styles/app.js')}}"></script>
   </head>
   <body>
     <header class="head">
@@ -31,13 +32,13 @@
       <hr />
       <div class="type-page">
         <div class="title">計算正整數的平方</div>
-        <form method="POST">
+        <form>
           <div class="type-place">
             <span>正整數</span>
-            <input type="text" name="variable" />
+            <input type="text" name="number" id="number"/>
           </div>
           <div>
-            <button class="btn">計算</button>
+            <button type='submit' class="btn" onclick="redirect()">計算</button>
           </div>
         </form>
       </div>

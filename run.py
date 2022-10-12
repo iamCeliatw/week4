@@ -15,17 +15,13 @@ app.secret_key= "asd24680"
 
 @app.route("/",methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        result = request.form['variable']
-        return redirect(url_for("square", number=result))
     return render_template("index2.html")
 
 #驗證系統路由 使用POST
 @app.route("/signin", methods=["POST"])
 def signin():
-    if request.method == "POST":
-        user_account = request.form['account']
-        user_password = request.form['password']
+    user_account = request.form['account']
+    user_password = request.form['password']
     if user_account == "test" and user_password == "test":
         session['ac'] = user_account
         session['pa'] = user_password
@@ -38,7 +34,7 @@ def signin():
 #成功登入頁
 @app.route("/member")
 def member():
-    if session['ac'] and session["pa"]:
+    if session.get('ac') and session.get('pa'):
         return render_template("success.html")
     else:
         return redirect("/")
