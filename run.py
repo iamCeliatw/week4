@@ -11,7 +11,7 @@ app = Flask(
 )
 
 #設定session 密鑰
-app.secret_key= "asd24680"
+app.secret_key= "sdvbjygvb"
 
 @app.route("/",methods=["GET", "POST"])
 def index():
